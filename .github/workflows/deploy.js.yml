@@ -15,19 +15,11 @@ jobs:
     defaults:
       run:
         working-directory: ./app
-    # strategy:
-    #   matrix:
-    #     node-version: [12.x, 14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - name: Check Out Repo
       uses: actions/checkout@v2
-    # - name: Use Node.js ${{ matrix.node-version }}
-    #   uses: actions/setup-node@v2
-    #   with:
-    #     node-version: ${{ matrix.node-version }}
-    #     cache: 'npm'
+
     - name: Login to Docker Hub
       uses: docker/login-action@v1
       with:
@@ -36,6 +28,7 @@ jobs:
     
     - name: Build
       run: docker build -t nodejsapp .
+
     - name: Tag
       run: |
         docker tag nodejsapp ${{ secrets.DOCKER_HUB_USERNAME }}/nodejsapp:latest
@@ -43,30 +36,6 @@ jobs:
       run: |
         docker push ${{ secrets.DOCKER_HUB_USERNAME }}/nodejsapp:latest
 
-    - name: Run
-      run: |
-        docker run --restart unless-stopped -p 3000:3000 -d ${{ secrets.DOCKER_HUB_USERNAME }}/nodejsapp:latest
-    
-    # - name: Set up Docker Buildx
-    #   id: buildx
-    #   uses: docker/setup-buildx-action@v1
-
-    # - name: Build and push
-    #   id: docker_build
-    #   uses: docker/build-push-action@v2
-    #   run: pwd
-    #   with:
-    #     context: ./
-    #     file: ./Dockerfile
-    #     push: true
-    #     tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nodejsapp:latest
-
-    # - name: Image digest
-    #   run: echo ${{ steps.docker_build.outputs.digest }}
-
-    # - run: cd app/
-    # - run: docker build -t app .
-    # - run: docker run -d -p 3000:3000 app
-#     - run: npm ci
-#     - run: npm run build --if-present
-#     - run: npm test
+    # - name: Run
+    #   run: |
+    #     docker run --restart unless-stopped -p 3000:3000 -d ${{ secrets.DOCKER_HUB_USERNAME }}/nodejsapp:latest
