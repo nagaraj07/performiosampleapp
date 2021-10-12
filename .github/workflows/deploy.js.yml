@@ -12,6 +12,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./app
     # strategy:
     #   matrix:
     #     node-version: [12.x, 14.x, 16.x]
@@ -36,7 +39,6 @@ jobs:
       uses: docker/setup-buildx-action@v1
 
     - name: Build and push
-      working-directory: ./app
       id: docker_build
       uses: docker/build-push-action@v2
       with:
