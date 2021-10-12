@@ -35,16 +35,17 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
     
     - name: Build
-      # working-directory: ./app
       run: docker build -t nodejsapp .
-    - name: Tags
-      # working-directory: ./app
+    - name: Tag
       run: |
         docker tag nodejsapp ${{ secrets.DOCKER_HUB_USERNAME }}/nodejsapp:latest
     - name: Push
-      # working-directory: ./app
       run: |
         docker push ${{ secrets.DOCKER_HUB_USERNAME }}/nodejsapp:latest
+
+    - name: Run
+      run: |
+        docker run --restart unless-stopped -p 3000:3000 -d ${{ secrets.DOCKER_HUB_USERNAME }}/nodejsapp:latest
     
     # - name: Set up Docker Buildx
     #   id: buildx
