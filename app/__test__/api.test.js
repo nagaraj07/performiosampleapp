@@ -1,20 +1,24 @@
-// const request = require("supertest");
-// const app = require("../server");
+const app = require("../getFunction");
 const supertest = require("supertest");
 
-test("GET /api/v1", async () => {
-  const post = await Post.create({ version: "1.0", description: "pre-interview technical test", lastcommitsha: "abc57858585" });
+describe("Testing performio sample API", () => {
+  // Success test case for base route path
+	it("tests the base route path and returns the given message", async () => {
+		const response = await supertest(app).get('/');
+		expect(response.status).toBe(200);
+		expect(response.text).toBe('Hello World!');
+	});
+  // Success test case for get endpoint
+  it("tests the get endpoint and returns the metadata of the application", async () => {
+		const response = await supertest(app).get('/app/v1');
+		expect(response.status).toBe(200);
+		expect(response.text).toBe('{"version":"1.0","description":"pre-interview technical test","lastcommitsha":"abc57858585"}');
+	});
+  // Failure test case for get endpoint
+  it("tests the get endpoint and returns the metadata of the application", async () => {
+		const response = await supertest(app).get('/app/v1');
+		expect(response.status).toBe(200);
+		expect(response.text).toBe('{"version":"2.0","description":"pre-interview technical test","lastcommitsha":"abc57858585"}');
+	});
 
-  await supertest(app).get("/api/v1")
-    .expect(200)
-    .then((response) => {
-      // Check type and length
-      expect(Array.isArray(response.body)).toBeTruthy();
-      expect(response.body.length).toEqual(1);
-
-      // Check data
-      expect(response.body[0].version).toBe(post.version);
-      expect(response.body[0].description).toBe(post.description);
-      expect(response.body[0].lastcommitsha).toBe(post.lastcommitsha);
-    });
 });
