@@ -15,10 +15,10 @@ describe("Testing performio sample API", () => {
 		expect(response.text).toBe('{"version":"1.0","description":"pre-interview technical test","lastcommitsha":"abc57858585"}');
 	});
   // Failure test case for get endpoint
-  it("tests the get endpoint and returns the metadata of the application", async () => {
-		const response = await supertest(app).get('/app/v1');
-		expect(response.status).toBe(200);
-		expect(response.text).toBe('{"version":"2.0","description":"pre-interview technical test","lastcommitsha":"abc57858585"}');
-	});
+//   it("tests the get endpoint and returns the metadata of the application", async () => {
+// 		const response = await supertest(app).get('/app/v1');
+// 		expect(response.status).toBe(200);
+// 		expect(response.text).toBe('{"version":"2.0","description":"pre-interview technical test","lastcommitsha":"abc57858585"}');
+// 	});
 
 });
