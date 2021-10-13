@@ -1,6 +1,6 @@
 FROM node:12-alpine3.14
 
-# Add a work directory
+# Current work directory
 WORKDIR /app
 COPY package*.json ./
 

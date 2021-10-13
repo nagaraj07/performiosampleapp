@@ -14,7 +14,6 @@ app.get('/app/v1', (req, res) => {
       version: version,
       description: description,
       lastcommitsha: lastcommitsha,
-      // date: new Date()
     }
     res.status(200).send(data);
 });
