@@ -15,7 +15,6 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     defaults:
       run:
         working-directory: ./app
@@ -31,7 +30,6 @@ jobs:
     - run: npm install
 
     - name: Jest Mock Test
-      # working-directory: ./app
       run: npm test
 
     - name: Login to Docker Hub
