@@ -3,11 +3,11 @@ var app = express();
 
 const version = '1.0';
 const description = 'pre-interview technical test';
-const lastcommitsha = 'abc57858585';
+// const lastcommitsha = 'abc57858585';
 
-// const lastcommitsha = require('child_process')
-//   .execSync('git rev-parse HEAD')
-//   .toString().trim()
+const lastcommitsha = require('child_process')
+  .execSync('git rev-parse HEAD')
+  .toString().trim()
 
 app.get('/', function (req, res) {
   res.status(200).send('Hello World!');
